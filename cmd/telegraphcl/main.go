@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/plant99/telegraphcl/pkg/user"
+	"github.com/plant99/telegraphcl/pkg/cmd"
 )
 
 func main() {
-	fmt.Println("Microblog with telegra.ph from your friendly neighbourhood terminal :)")
-	user.PrintSomethingAboutUser("something for the user")
+	cmd.Execute()
 }
