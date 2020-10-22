@@ -17,4 +17,5 @@ func Execute() {
 
 func AddCommands() {
 	TelegraphCommand.AddCommand(versionCmd)
+	TelegraphCommand.AddCommand(userCmd)
 }
