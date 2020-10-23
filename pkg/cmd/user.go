@@ -10,12 +10,12 @@ var userCmd = &cobra.Command{
 	Short: "Operations related to Telegraph account management",
 	Run: func(cmd *cobra.Command, args []string) {
 		userNew := user.User{
-			"shortname",
-			"authorname",
-			"authorurl",
-			"",
-			"",
-			0,
+			ShortName:   "shortname",
+			AuthorName:  "authorname",
+			AuthorUrl:   "https://shivashis.xyz",
+			AccessToken: "",
+			AuthUrl:     "",
+			PageCount:   0,
 		}
 		user.CreateUser(userNew)
 	},
