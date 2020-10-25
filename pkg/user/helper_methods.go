@@ -2,38 +2,23 @@ package user
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/url"
+
+	"github.com/plant99/telegraphcl/pkg/util"
 )
 
 func CreateUser(user User) {
-	// create URL
-	createUserURL := url.URL{
-		Scheme: "https",
-		Host:   "api.telegra.ph",
-		Path:   "/createAccount",
+
+	userToBeCreated := createUser{
+		ShortName:  user.ShortName,
+		AuthorName: user.AuthorName,
+		AuthorUrl:  user.AuthorUrl,
 	}
-	createUserURLQuery := createUserURL.Query()
-	createUserURLQuery.Set("short_name", user.ShortName)
-	createUserURLQuery.Set("author_name", user.AuthorName)
-	createUserURLQuery.Set("author_url", user.AuthorUrl)
 
-	createUserURL.RawQuery = createUserURLQuery.Encode()
-	createUserURLString := createUserURL.String()
-
-	// make request
-	res, err := http.Get(createUserURLString)
+	data, err := util.MakeRequest("createAccount", userToBeCreated)
 
 	if err != nil {
-		fmt.Println("Error while making request for Create Account")
+		fmt.Println(err)
 	}
-
-	// read all response body
-	data, _ := ioutil.ReadAll(res.Body)
-
-	// close response body
-	res.Body.Close()
 
 	// print `data` as a string
 	fmt.Printf("%s\n", data)
