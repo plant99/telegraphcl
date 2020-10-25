@@ -3,10 +3,25 @@ package util
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os/user"
+	"path"
 
 	jsoniter "github.com/json-iterator/go"
 	http "github.com/valyala/fasthttp"
 )
+
+func getTokenPath() string {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return path.Join(usr.HomeDir, "telegraph.token")
+}
+
+var tokenPath string = getTokenPath()
 
 type Response struct {
 	Ok     bool            `json:"ok"`
@@ -53,4 +68,21 @@ func MakeRequest(path string, payload interface{}) ([]byte, error) {
 	}
 
 	return r.Result, nil
+}
+
+func StoreAccessToken(token string) (int, error) {
+	err := ioutil.WriteFile(tokenPath, []byte(token), 0644)
+	if err != nil {
+		fmt.Println(err)
+		return 1, errors.New("Couldn't save token :(")
+	}
+	return 0, nil
+}
+
+func FetchAccessToken() (string, error) {
+	data, err := ioutil.ReadFile(tokenPath)
+	if err != nil {
+		return "", err
+	}
+	return string(data), nil
 }

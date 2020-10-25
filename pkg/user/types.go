@@ -16,3 +16,11 @@ type createUser struct {
 	AuthorName string `json:"author_name"`
 	AuthorUrl  string `json:"author_url"`
 }
+
+type createUserResponse struct {
+	ShortName   string `json:"short_name"`
+	AuthorName  string `json:"author_name"`
+	AuthorUrl   string `json:"author_url"`
+	AccessToken string `json:"access_token"`
+	AuthUrl     string `json:"auth_url"`
+}
