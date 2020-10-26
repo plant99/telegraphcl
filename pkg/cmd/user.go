@@ -35,11 +35,19 @@ var createCmd = &cobra.Command{
 			AuthUrl:     "",
 			PageCount:   0,
 		}
-		fmt.Println(userNew)
 		user.CreateUser(userNew)
+	},
+}
+
+var viewCmd = &cobra.Command{
+	Use:   "view",
+	Short: "View current user information",
+	Run: func(cmd *cobra.Command, args []string) {
+		user.ViewCurrentUserInfo()
 	},
 }
 
 func init() {
 	userCmd.AddCommand(createCmd)
+	userCmd.AddCommand(viewCmd)
 }

@@ -24,3 +24,15 @@ type createUserResponse struct {
 	AccessToken string `json:"access_token"`
 	AuthUrl     string `json:"auth_url"`
 }
+
+type viewUserInfoRequest struct {
+	AccessToken string   `json:"access_token"`
+	Fields      []string `json:"fields"`
+}
+
+type viewUserInfoResponse struct {
+	ShortName  string `json:"short_name"`
+	AuthorName string `json:"author_name"`
+	AuthorUrl  string `json:"author_url"`
+	PageCount  int32  `json:"page_count"`
+}
