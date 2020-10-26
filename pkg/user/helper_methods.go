@@ -58,3 +58,32 @@ func ViewCurrentUserInfo() {
 	fmt.Println("Author URL: ", userInfo.AuthorUrl)
 	fmt.Println("Page Count: ", userInfo.PageCount)
 }
+
+func EditCurrentUserInfo(user User) {
+	accessToken, err := util.FetchAccessToken()
+	if err != nil {
+		fmt.Println("Error fetching access token, have you deleted ~/telegraph.token?")
+	}
+	editUserInfo := editUserInfoRequest{
+		AccessToken: accessToken,
+		ShortName:   user.ShortName,
+		AuthorName:  user.AuthorName,
+		AuthorUrl:   user.AuthorUrl,
+	}
+
+	data, err := util.MakeRequest("editAccountInfo", editUserInfo)
+
+	parser := jsoniter.ConfigFastest
+
+	userInfo := new(editUserInfoResponse)
+
+	if err = parser.Unmarshal(data, userInfo); err != nil {
+		fmt.Println("Couldn't handle api.telegra.ph response.")
+	}
+
+	// view user information
+	fmt.Println("Updated user account information!")
+	fmt.Println("Short Name: ", userInfo.ShortName)
+	fmt.Println("Author Name: ", userInfo.AuthorName)
+	fmt.Println("Author URL: ", userInfo.AuthorUrl)
+}

@@ -36,3 +36,14 @@ type viewUserInfoResponse struct {
 	AuthorUrl  string `json:"author_url"`
 	PageCount  int32  `json:"page_count"`
 }
+
+type editUserInfoRequest struct {
+	AccessToken string `json:"access_token"`
+	ShortName   string `json:"short_name"`
+	AuthorName  string `json:"author_name"`
+	AuthorUrl   string `json:"author_url"`
+}
+
+type editUserInfoResponse struct {
+	createUser
+}
