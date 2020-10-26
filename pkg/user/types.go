@@ -35,6 +35,7 @@ type viewUserInfoResponse struct {
 	AuthorName string `json:"author_name"`
 	AuthorUrl  string `json:"author_url"`
 	PageCount  int32  `json:"page_count"`
+	AuthUrl    string `json:"auth_url"`
 }
 
 type editUserInfoRequest struct {

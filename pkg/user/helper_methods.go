@@ -39,7 +39,7 @@ func ViewCurrentUserInfo() {
 	}
 	viewInfoRequest := viewUserInfoRequest{
 		AccessToken: accessToken,
-		Fields:      []string{"short_name", "author_name", "author_url", "page_count"},
+		Fields:      []string{"short_name", "author_name", "author_url", "auth_url", "page_count"},
 	}
 
 	data, err := util.MakeRequest("getAccountInfo", viewInfoRequest)
@@ -57,6 +57,7 @@ func ViewCurrentUserInfo() {
 	fmt.Println("Author Name: ", userInfo.AuthorName)
 	fmt.Println("Author URL: ", userInfo.AuthorUrl)
 	fmt.Println("Page Count: ", userInfo.PageCount)
+	fmt.Println("Auth URL", userInfo.AuthUrl)
 }
 
 func EditCurrentUserInfo(user User) {
