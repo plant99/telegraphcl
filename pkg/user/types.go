@@ -48,3 +48,11 @@ type editUserInfoRequest struct {
 type editUserInfoResponse struct {
 	createUser
 }
+
+type revokeAccessTokenRequest struct {
+	AccessToken string `json:"access_token"`
+}
+
+type revokeAccessTokenResponse struct {
+	User
+}

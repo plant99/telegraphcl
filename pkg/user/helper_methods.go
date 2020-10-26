@@ -88,3 +88,29 @@ func EditCurrentUserInfo(user User) {
 	fmt.Println("Author Name: ", userInfo.AuthorName)
 	fmt.Println("Author URL: ", userInfo.AuthorUrl)
 }
+
+func RevokeAccessToken() {
+	accessToken, err := util.FetchAccessToken()
+	if err != nil {
+		fmt.Println("Error fetching access token, have you deleted ~/telegraph.token?")
+	}
+
+	revokeAccessToken := revokeAccessTokenRequest{
+		AccessToken: accessToken,
+	}
+
+	data, err := util.MakeRequest("revokeAccessToken", revokeAccessToken)
+
+	parser := jsoniter.ConfigFastest
+
+	resultUser := new(revokeAccessTokenResponse)
+
+	if err = parser.Unmarshal(data, resultUser); err != nil {
+		fmt.Println("Couldn't handle api.telegra.ph response.")
+	}
+
+	// save access token
+	util.StoreAccessToken(resultUser.AccessToken)
+
+	fmt.Println("Revoked access token and created a new one!")
+}

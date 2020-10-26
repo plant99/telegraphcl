@@ -72,8 +72,17 @@ var editCmd = &cobra.Command{
 	},
 }
 
+var revokeCmd = &cobra.Command{
+	Use:   "revoke",
+	Short: "Revoke current access token, and regenerate access token.",
+	Run: func(cmd *cobra.Command, args []string) {
+		user.RevokeAccessToken()
+	},
+}
+
 func init() {
 	userCmd.AddCommand(createCmd)
 	userCmd.AddCommand(viewCmd)
 	userCmd.AddCommand(editCmd)
+	userCmd.AddCommand(revokeCmd)
 }
