@@ -32,7 +32,11 @@ func ListPages() {
 	if err = parser.Unmarshal(data, pageList); err != nil {
 		fmt.Println("Couldn't handle api.telegra.ph response.")
 	}
-	fmt.Println(pageList)
+	fmt.Println("Index ) Path | Title")
+	fmt.Println("--------------------")
+	for i := 0; i < len(pageList.Pages); i++ {
+		fmt.Println(i, ")", pageList.Pages[i].Path, "|", pageList.Pages[i].Title)
+	}
 }
 
 func GetViews(path string) {
