@@ -27,3 +27,7 @@ type Page struct {
 }
 
 type Node interface{}
+
+type PageViews struct {
+	Views int `json:"views"`
+}

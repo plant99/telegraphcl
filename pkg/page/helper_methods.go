@@ -34,3 +34,22 @@ func ListPages() {
 	}
 	fmt.Println(pageList)
 }
+
+func GetViews(path string) {
+	// make request parameters
+	requestPageViews := map[string]string{
+		"path": path,
+	}
+
+	responsePageViews := new(PageViews)
+	// get total views on page
+	data, err := util.MakeRequest("getViews", requestPageViews)
+
+	parser := jsoniter.ConfigFastest
+
+	if err = parser.Unmarshal(data, &responsePageViews); err != nil {
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?")
+	}
+	fmt.Println(responsePageViews.Views)
+
+}
