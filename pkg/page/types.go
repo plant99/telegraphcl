@@ -42,3 +42,15 @@ type createPageRequest struct {
 	Content       []Node `json:"content"`
 	ReturnContent bool   `json:"return_content"`
 }
+
+type editPageRequest struct {
+	// user related fields
+	AccessToken string `json:"access_token"`
+	AuthorName  string `json:"author_name"`
+	AuthorUrl   string `json:"author_url"`
+	// page related fields
+	Title         string `json:"title"`
+	Content       []Node `json:"content"`
+	ReturnContent bool   `json:"return_content"`
+	Path          string `json:"path"`
+}

@@ -32,10 +32,10 @@ func ListPages() {
 	if err = parser.Unmarshal(data, pageList); err != nil {
 		fmt.Println("Couldn't handle api.telegra.ph response.")
 	}
-	fmt.Println("Index | Path | Title")
+	fmt.Println("Index | URL | Title")
 	fmt.Println("--------------------")
 	for i := 0; i < len(pageList.Pages); i++ {
-		fmt.Println(i, ")", pageList.Pages[i].Path, "|", pageList.Pages[i].Title)
+		fmt.Println(i, ")", pageList.Pages[i].URL, "|", pageList.Pages[i].Title)
 	}
 }
 
@@ -99,4 +99,32 @@ func GetPage(path string) {
 		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
 	}
 	fmt.Println(responseGetPage.Title, responseGetPage.URL)
+}
+
+func EditPage(path string) {
+	// get access_token
+	accessToken, err := util.FetchAccessToken()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	editPageRequestInstance := editPageRequest{
+		Title:         "Some dummy title",
+		AuthorName:    "Some dummy name edited",
+		AuthorUrl:     "https://one.two.three",
+		Content:       []Node{"some dummy content but edited"},
+		ReturnContent: true,
+		AccessToken:   accessToken,
+		Path:          path,
+	}
+
+	editPageResponseInstance := new(Page)
+	// get total views on page
+	data, err := util.MakeRequest("editPage", editPageRequestInstance)
+	parser := jsoniter.ConfigFastest
+	if err = parser.Unmarshal(data, &editPageResponseInstance); err != nil {
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
+	}
+	fmt.Println(editPageResponseInstance.Title)
+
 }

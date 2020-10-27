@@ -45,9 +45,19 @@ var pageGetCmd = &cobra.Command{
 	},
 }
 
+var pageEditCmd = &cobra.Command{
+	Use:   "edit",
+	Short: "Edit page with Telegra.ph path",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		page.EditPage(args[0])
+	},
+}
+
 func init() {
 	pageCmd.AddCommand(pageListCmd)
 	pageCmd.AddCommand(pageViewsCmd)
 	pageCmd.AddCommand(pageCreateCmd)
 	pageCmd.AddCommand(pageGetCmd)
+	pageCmd.AddCommand(pageEditCmd)
 }
