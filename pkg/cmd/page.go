@@ -36,8 +36,18 @@ var pageCreateCmd = &cobra.Command{
 	},
 }
 
+var pageGetCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Get page with Telegra.ph path",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		page.GetPage(args[0])
+	},
+}
+
 func init() {
 	pageCmd.AddCommand(pageListCmd)
 	pageCmd.AddCommand(pageViewsCmd)
 	pageCmd.AddCommand(pageCreateCmd)
+	pageCmd.AddCommand(pageGetCmd)
 }

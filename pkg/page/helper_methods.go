@@ -84,3 +84,19 @@ func CreatePage() {
 	fmt.Println(createPageResponseInstance.Title)
 
 }
+
+func GetPage(path string) {
+
+	requestGetPage := map[string]string{
+		"path": path,
+	}
+
+	responseGetPage := new(Page)
+	// get total views on page
+	data, err := util.MakeRequest("getPage", requestGetPage)
+	parser := jsoniter.ConfigFastest
+	if err = parser.Unmarshal(data, &responseGetPage); err != nil {
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
+	}
+	fmt.Println(responseGetPage.Title, responseGetPage.URL)
+}
