@@ -27,7 +27,17 @@ var pageViewsCmd = &cobra.Command{
 	},
 }
 
+var pageCreateCmd = &cobra.Command{
+	Use:   "create",
+	Short: "Create Page from a Markdown file.",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		page.CreatePage()
+	},
+}
+
 func init() {
 	pageCmd.AddCommand(pageListCmd)
 	pageCmd.AddCommand(pageViewsCmd)
+	pageCmd.AddCommand(pageCreateCmd)
 }
