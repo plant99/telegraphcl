@@ -88,7 +88,7 @@ func CreatePage(path string) {
 	if err = parser.Unmarshal(data, &createPageResponseInstance); err != nil {
 		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
 	}
-	fmt.Println(createPageResponseInstance.Title)
+	fmt.Println(createPageResponseInstance.URL)
 
 }
 

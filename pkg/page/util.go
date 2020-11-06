@@ -21,7 +21,6 @@ func MarkdownFileToNodes(path string) ([]Node, error) {
 	}
 	// read markdown, and convert to html strings
 	htmlText, err := MarkdownToHTML(string(data))
-	fmt.Println(htmlText)
 	if err != nil {
 		return nil, errors.New("Couldn't parse markdown string to html.")
 	}
