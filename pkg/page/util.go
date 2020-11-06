@@ -69,6 +69,10 @@ func traverseNodes(selections *goquery.Selection) []Node {
 		for _, node := range child.Nodes {
 			switch node.Type {
 			case html.TextNode:
+				// ignore single occurences of '\n'
+				if node.Data == "\n" {
+					continue
+				}
 				nodes = append(nodes, node.Data) // append text
 			case html.ElementNode:
 				// attributes
