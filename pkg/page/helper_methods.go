@@ -89,7 +89,7 @@ func CreatePage(path string, title string) {
 	data, err := util.MakeRequest("createPage", createPageRequestInstance)
 	parser := jsoniter.ConfigFastest
 	if err = parser.Unmarshal(data, &createPageResponseInstance); err != nil {
-		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?")
 	}
 	fmt.Println(createPageResponseInstance.URL)
 
@@ -106,7 +106,7 @@ func GetPage(path string) {
 	data, err := util.MakeRequest("getPage", requestGetPage)
 	parser := jsoniter.ConfigFastest
 	if err = parser.Unmarshal(data, &responseGetPage); err != nil {
-		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?")
 	}
 	fmt.Println(responseGetPage.Title, responseGetPage.URL)
 }
@@ -133,7 +133,7 @@ func EditPage(path string) {
 	data, err := util.MakeRequest("editPage", editPageRequestInstance)
 	parser := jsoniter.ConfigFastest
 	if err = parser.Unmarshal(data, &editPageResponseInstance); err != nil {
-		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?", err)
+		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?")
 	}
 	fmt.Println(editPageResponseInstance.Title)
 
