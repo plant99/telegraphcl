@@ -28,6 +28,12 @@ type Page struct {
 
 type Node interface{}
 
+type NodeElement struct {
+	Tag      string            `json:"tag"`
+	Attrs    map[string]string `json:"attrs,omitempty"`
+	Children []Node            `json:"children,omitempty"`
+}
+
 type PageViews struct {
 	Views int `json:"views"`
 }

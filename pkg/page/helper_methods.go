@@ -58,18 +58,25 @@ func GetViews(path string) {
 
 }
 
-func CreatePage() {
+func CreatePage(path string) {
 	// get access_token
 	accessToken, err := util.FetchAccessToken()
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	// get []Nodes from markdown file in path
+	nodes, err := MarkdownFileToNodes(path)
+
+	if err != nil {
+		panic(err)
+	}
+
 	createPageRequestInstance := createPageRequest{
 		Title:         "Some dummy title",
 		AuthorName:    "Some dummy name",
 		AuthorUrl:     "https://one.two.three",
-		Content:       []Node{"some dummy content"},
+		Content:       nodes,
 		ReturnContent: true,
 		AccessToken:   accessToken,
 	}
