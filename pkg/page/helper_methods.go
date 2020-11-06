@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	jsoniter "github.com/json-iterator/go"
+	"github.com/plant99/telegraphcl/pkg/user"
 	"github.com/plant99/telegraphcl/pkg/util"
 )
 
@@ -58,7 +59,7 @@ func GetViews(path string) {
 
 }
 
-func CreatePage(path string) {
+func CreatePage(path string, title string) {
 	// get access_token
 	accessToken, err := util.FetchAccessToken()
 	if err != nil {
@@ -72,10 +73,12 @@ func CreatePage(path string) {
 		panic(err)
 	}
 
+	userInfo := user.GetCurrentUserNameAndURL()
+
 	createPageRequestInstance := createPageRequest{
-		Title:         "Some dummy title",
-		AuthorName:    "Some dummy name",
-		AuthorUrl:     "https://one.two.three",
+		Title:         title,
+		AuthorName:    userInfo[0],
+		AuthorUrl:     userInfo[1],
 		Content:       nodes,
 		ReturnContent: true,
 		AccessToken:   accessToken,
