@@ -22,7 +22,7 @@ var pageListCmd = &cobra.Command{
 
 var pageViewsCmd = &cobra.Command{
 	Use:   "views",
-	Short: "Count views on your Telegra.ph page.",
+	Short: "Count views on your Telegra.ph page. Arguments: <path>",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		page.GetViews(args[0])
@@ -31,7 +31,7 @@ var pageViewsCmd = &cobra.Command{
 
 var pageCreateCmd = &cobra.Command{
 	Use:   "create",
-	Short: "Create Page from a Markdown file. Arguments: <path> <title>",
+	Short: "Create Page from a Markdown file. Arguments: <markdown-path> <title>",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		page.CreatePage(args[0], args[1])
@@ -40,7 +40,7 @@ var pageCreateCmd = &cobra.Command{
 
 var pageGetCmd = &cobra.Command{
 	Use:   "get",
-	Short: "Get page with Telegra.ph path",
+	Short: "Get page with Telegra.ph path. Arguments: <path>",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		page.GetPage(args[0])
@@ -49,7 +49,7 @@ var pageGetCmd = &cobra.Command{
 
 var pageEditCmd = &cobra.Command{
 	Use:   "edit",
-	Short: "Edit page with Telegra.ph path",
+	Short: "Edit page with Telegra.ph path. Arguments: <path> <markdown-path>",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		// Taking input from user
