@@ -6,6 +6,9 @@ telegra.ph from your friendly terminal.
 [telegra.ph](https://telegra.ph) is a minimalist content publishing platform for users to quickly share richly formatted post. `telegraphcl` lets you use
 telegra.ph from command-line, using Markdown file to draft your posts.
 
+Here's what you can do with `telegraphcl`
+[![asciicast](https://asciinema.org/a/371198.png)](https://asciinema.org/a/371198)
+
 ## Installation
 
 ### Using golang installation
@@ -16,11 +19,9 @@ telegra.ph from command-line, using Markdown file to draft your posts.
 
 Let's say `examples` directory has the markdown files to be used to create/edit pages.
 
-    $ docker run -v ~/.telegraphcl:/root/.telegraphcl -v "$PWD"/examples:/root/telegraph-blogs/ -it telegraphcl --help
+    $ docker run -v ~/.telegraphcl:/root/.telegraphcl -v "$PWD"/examples:/root/telegraph-blogs/ -it plant99/telegraphcl --help
 
 ## Usage
-
-Note: One can run the same commands
 
     $ telegraphcl --help
 
@@ -108,7 +109,7 @@ Create a markdown file in `<markdown-dir>`, say `first_page.md`. Then run the fo
 *Note for docker image users*: The `WORKDIR` is `/root/telegraph-blogs` so to reference files, you can assume you're running `telegraph` from `<markdown-dir>`.
 So assuming `examples` is my `<markdown-dir>`, the following would create a page.
 
-    $ docker run -v ~/.telegraphcl:/root/.telegraphcl -v "$PWD"/examples:/root/telegraph-blogs/ -it telegraphcl:latest page create tiny_blogpost.md some-title
+    $ docker run -v ~/.telegraphcl:/root/.telegraphcl -v "$PWD"/examples:/root/telegraph-blogs/ -it plant99/telegraphcl page create tiny_blogpost.md some-title
 
 
 #### list
@@ -138,6 +139,17 @@ To get the count of views on a particular page, run the following command.
 ### version
 
 Prints the version of `telegraphcl`.
+
+
+## Note
+
+
+telegra.ph doesn't support all Markdown formatting
+
+1. h1 elements, `#` in Markdown format.
+2. h2 elements, `##` in Markdown format.
+
+There could be others, please raise an issue in that case, the documentation would be updated.
 
 ## Contributing
 
