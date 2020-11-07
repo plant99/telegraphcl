@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 
 	"github.com/plant99/telegraphcl/pkg/page"
 	"github.com/spf13/cobra"
@@ -53,9 +55,9 @@ var pageEditCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		// Taking input from user
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter the updated title of this page: ")
-		var title string
-		fmt.Scanln(&title)
+		title, _ := reader.ReadString('\n')
 		page.EditPage(args[0], args[1], title)
 	},
 }

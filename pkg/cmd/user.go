@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 
 	"github.com/plant99/telegraphcl/pkg/user"
 	"github.com/spf13/cobra"
@@ -17,15 +19,13 @@ var createCmd = &cobra.Command{
 	Short: "Create an user",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Taking input from user
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter your username: ")
-		var shortName string
-		fmt.Scanln(&shortName)
+		shortName, _ := reader.ReadString('\n')
 		fmt.Print("Enter your fullname: ")
-		var fullName string
-		fmt.Scanln(&fullName)
+		fullName, _ := reader.ReadString('\n')
 		fmt.Print("Enter an url to be displayed on your articles: ")
-		var authorUrl string
-		fmt.Scanln(&authorUrl)
+		authorUrl, _ := reader.ReadString('\n')
 		userNew := user.User{
 			ShortName:   shortName,
 			AuthorName:  fullName,
@@ -51,15 +51,13 @@ var editCmd = &cobra.Command{
 	Short: "Edit current user information",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Taking input from user
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter your username: ")
-		var shortName string
-		fmt.Scanln(&shortName)
+		shortName, _ := reader.ReadString('\n')
 		fmt.Print("Enter your fullname: ")
-		var fullName string
-		fmt.Scanln(&fullName)
+		fullName, _ := reader.ReadString('\n')
 		fmt.Print("Enter an url to be displayed on your articles: ")
-		var authorUrl string
-		fmt.Scanln(&authorUrl)
+		authorUrl, _ := reader.ReadString('\n')
 		userUpdate := user.User{
 			ShortName:   shortName,
 			AuthorName:  fullName,
