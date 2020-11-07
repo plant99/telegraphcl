@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"os/user"
 	"path"
 
@@ -18,7 +19,11 @@ func getTokenPath() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return path.Join(usr.HomeDir, "telegraph.token")
+	// create .telegraphcl directory if it doesn't exist
+	if _, err := os.Stat(path.Join(usr.HomeDir, ".telegraphcl")); os.IsNotExist(err) {
+		os.Mkdir(path.Join(usr.HomeDir, "/.telegraphcl"), 0755)
+	}
+	return path.Join(usr.HomeDir, ".telegraphcl", "telegraph.token")
 }
 
 var tokenPath string = getTokenPath()
