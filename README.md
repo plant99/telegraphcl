@@ -11,9 +11,14 @@ Here's what you can do with `telegraphcl`
 
 ## Installation
 
+Please make sure go binaries are accessible. i.e for UNIX,
+
+    $ export PATH=$PATH:~/go/bin/
+
+
 ### Using golang installation
 
-    $ go get github.com/plant99/telegraphcl
+    $ go get github.com/plant99/telegraphcl/cmd/telegraphcl
 
 ### Using docker
 
