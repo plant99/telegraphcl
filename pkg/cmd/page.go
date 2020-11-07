@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/plant99/telegraphcl/pkg/page"
 	"github.com/spf13/cobra"
 )
@@ -48,9 +50,13 @@ var pageGetCmd = &cobra.Command{
 var pageEditCmd = &cobra.Command{
 	Use:   "edit",
 	Short: "Edit page with Telegra.ph path",
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		page.EditPage(args[0])
+		// Taking input from user
+		fmt.Print("Enter the updated title of this page: ")
+		var title string
+		fmt.Scanln(&title)
+		page.EditPage(args[0], args[1], title)
 	},
 }
 

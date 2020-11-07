@@ -111,18 +111,27 @@ func GetPage(path string) {
 	fmt.Println(responseGetPage.Title, responseGetPage.URL)
 }
 
-func EditPage(path string) {
+func EditPage(path string, markdownPath string, title string) {
 	// get access_token
 	accessToken, err := util.FetchAccessToken()
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	// get []Nodes from markdown file in path
+	nodes, err := MarkdownFileToNodes(markdownPath)
+
+	if err != nil {
+		panic(err)
+	}
+
+	userInfo := user.GetCurrentUserNameAndURL()
+
 	editPageRequestInstance := editPageRequest{
-		Title:         "Some dummy title",
-		AuthorName:    "Some dummy name edited",
-		AuthorUrl:     "https://one.two.three",
-		Content:       []Node{"some dummy content but edited"},
+		Title:         title,
+		AuthorName:    userInfo[0],
+		AuthorUrl:     userInfo[1],
+		Content:       nodes,
 		ReturnContent: true,
 		AccessToken:   accessToken,
 		Path:          path,
@@ -135,6 +144,6 @@ func EditPage(path string) {
 	if err = parser.Unmarshal(data, &editPageResponseInstance); err != nil {
 		fmt.Println("Couldn't handle api.telegra.ph response. Is the Telegra.ph path correct?")
 	}
-	fmt.Println(editPageResponseInstance.Title)
+	fmt.Println(editPageResponseInstance.URL)
 
 }
